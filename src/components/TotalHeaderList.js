@@ -4,17 +4,17 @@ import TotalHeader from './TotalHeader';
 class TotalHeaderList extends Component {
     render() {
         return (
-            <div class="row">
-                <div class="col">
+            <div className="row">
+                <div className="col">
                     <TotalHeader label="kCal" count={120} />
                 </div>
-                <div class="col">
+                <div className="col">
                     <TotalHeader label="Protein" count={15} />
                 </div>
-                <div class="col">
+                <div className="col">
                     <TotalHeader label="Fat" count={4} />
                 </div>
-                <div class="col">
+                <div className="col">
                     <TotalHeader label="Carb" count={7} />
                 </div>
             </div>

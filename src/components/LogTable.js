@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class LogTable extends Component {
     render() {
         return (
-            <div>
-                <table class="table table-dark">
+            <div className="row">
+                <table className="table table-striped table-sm">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -17,6 +17,87 @@ class LogTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+                        <tr>
+                            <td>06-11-2018</td>
+                            <td>String Cheese</td>
+                            <td>60</td>
+                            <td>120</td>
+                            <td>15</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
                         <tr>
                             <td>06-11-2018</td>
                             <td>String Cheese</td>

@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 class NavBar extends Component {
     render() {
         return (
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                <Link to="/" className="navbar-brand">Nutrient Log</Link>
-                <div class="navbar-nav">
-                    <div class="nav-item">
-                        <Link to="/add" className="nav-link">Add Log</Link>
+            <nav className="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
+                <div className="container">
+                    <Link to="/" className="navbar-brand">Nutrient Log</Link>
+                    <div className="navbar-nav text-right">
+                        <div className="nav-item">
+                            <Link to="/add" className="btn btn-secondary btn-sm">Add Log</Link>
+                        </div>
                     </div>
                 </div>
             </nav>

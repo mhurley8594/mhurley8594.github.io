@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import TotalHeaderList from './TotalHeaderList';
-import DashboardDatePicker from './DashboardDatePicker';
 import LogTable from './LogTable';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
+        <h3>Dashboard</h3>
         <TotalHeaderList />
-        <DashboardDatePicker />
+        <div className="form-group">
+          <label htmlFor="datepicker">
+            Date:
+        </label>
+          <input
+            className="form-control"
+            id="datepicker"
+            type="date"
+          />
+        </div>
         <LogTable />
       </div>
     );

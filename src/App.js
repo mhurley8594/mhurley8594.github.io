@@ -14,12 +14,10 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <NavBar />
-          <div class="container-fluid">
-            <Switch>
-              <Route exact={true} path="/" component={Dashboard} />
-              <Route exact={true} path="/add" component={LogForm} />
-            </Switch>
-          </div>
+          <Switch>
+            <Route exact={true} path="/" component={Dashboard} />
+            <Route exact={true} path="/add" component={LogForm} />
+          </Switch>
         </div>
       </BrowserRouter>
     );
