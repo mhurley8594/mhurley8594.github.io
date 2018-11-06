@@ -2,7 +2,7 @@
   "name": "quick-nutrient-log",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mhurley8594.github.io/quick-nutrient-log",
+  "homepage": "https://mhurley8594.github.io",
   "dependencies": {
     "bootstrap": "^4.1.3",
     "react": "^16.6.0",

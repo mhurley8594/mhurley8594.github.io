@@ -1,13 +1,13 @@
 {
-  "main.js": "/quick-nutrient-log/static/js/main.5c0288ca.chunk.js",
-  "main.js.map": "/quick-nutrient-log/static/js/main.5c0288ca.chunk.js.map",
-  "static/css/1.6f2804bc.chunk.css": "/quick-nutrient-log/static/css/1.6f2804bc.chunk.css",
-  "static/js/1.b8cdd97e.chunk.js": "/quick-nutrient-log/static/js/1.b8cdd97e.chunk.js",
-  "static/js/1.b8cdd97e.chunk.js.map": "/quick-nutrient-log/static/js/1.b8cdd97e.chunk.js.map",
-  "runtime~main.js": "/quick-nutrient-log/static/js/runtime~main.77a9b970.js",
-  "runtime~main.js.map": "/quick-nutrient-log/static/js/runtime~main.77a9b970.js.map",
-  "static/css/1.6f2804bc.chunk.css.map": "/quick-nutrient-log/static/css/1.6f2804bc.chunk.css.map",
-  "index.html": "/quick-nutrient-log/index.html",
-  "precache-manifest.612712611fddb3d552ed2cde4348be12.js": "/quick-nutrient-log/precache-manifest.612712611fddb3d552ed2cde4348be12.js",
-  "service-worker.js": "/quick-nutrient-log/service-worker.js"
+  "main.js": "/static/js/main.80742c64.chunk.js",
+  "main.js.map": "/static/js/main.80742c64.chunk.js.map",
+  "static/css/1.34c55c23.chunk.css": "/static/css/1.34c55c23.chunk.css",
+  "static/js/1.3ebf749c.chunk.js": "/static/js/1.3ebf749c.chunk.js",
+  "static/js/1.3ebf749c.chunk.js.map": "/static/js/1.3ebf749c.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
+  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
+  "static/css/1.34c55c23.chunk.css.map": "/static/css/1.34c55c23.chunk.css.map",
+  "index.html": "/index.html",
+  "precache-manifest.019cd38dbc53cbfd187f5c5aafb66e09.js": "/precache-manifest.019cd38dbc53cbfd187f5c5aafb66e09.js",
+  "service-worker.js": "/service-worker.js"
 }
