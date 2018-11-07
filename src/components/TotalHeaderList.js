@@ -4,7 +4,7 @@ import TotalHeader from './TotalHeader';
 class TotalHeaderList extends Component {
     render() {
         return (
-            <div className="row">
+            <div className="row text-center">
                 <div className="col">
                     <TotalHeader label="kCal" count={120} />
                 </div>

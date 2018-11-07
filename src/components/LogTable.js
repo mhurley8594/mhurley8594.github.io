@@ -1,13 +1,28 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class LogTable extends Component {
+    renderTableRows() {
+        return this.props.logs.map((log) => {
+            return (
+                <tr key={log.id}>
+                    <td>{log.food}</td>
+                    <td>{log.grams}</td>
+                    <td>{log.kcal}</td>
+                    <td>{log.protein}</td>
+                    <td>{log.fat}</td>
+                    <td>{log.carb}</td>
+                </tr>
+            );
+        });
+    }
+
     render() {
         return (
             <div className="row">
                 <table className="table table-striped table-sm">
                     <thead>
                         <tr>
-                            <th>Date</th>
                             <th>Food</th>
                             <th>Grams</th>
                             <th>kCal</th>
@@ -17,96 +32,7 @@ class LogTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
-                        <tr>
-                            <td>06-11-2018</td>
-                            <td>String Cheese</td>
-                            <td>60</td>
-                            <td>120</td>
-                            <td>15</td>
-                            <td>4</td>
-                            <td>7</td>
-                        </tr>
+                        {this.renderTableRows()}
                     </tbody>
                 </table>
             </div>
@@ -114,4 +40,11 @@ class LogTable extends Component {
     }
 }
 
-export default LogTable;
+
+function mapStateToProps(state) {
+    return {
+        logs: state.logs
+    }
+}
+
+export default connect(mapStateToProps)(LogTable);

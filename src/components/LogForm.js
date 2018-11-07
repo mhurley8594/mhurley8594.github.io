@@ -8,27 +8,32 @@ class LogForm extends Component {
     }
 
     render() {
+        // Get the current date.
+        const today = new Date();
+        const currentDate = today.toISOString().substr(0, 10);
+
         return (
             <div className="container">
-                <h3>
+                <h3 className="text-center">
                     Add Log
                 </h3>
                 <form onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="date">Date</label>
                         <input
-                            id="date"
-                            name="date"
                             type="date"
+                            name="date"
+                            id="date"
                             className="form-control"
+                            defaultValue={currentDate}
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="food">Food</label>
                         <input
-                            id="food"
-                            name="food"
                             type="text"
+                            name="food"
+                            id="food"
                             className="form-control"
                         />
                     </div>
