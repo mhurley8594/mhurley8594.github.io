@@ -1,25 +1,41 @@
-import React, { Component } from 'react';
-import TotalHeader from './TotalHeader';
+import React from "react";
+import TotalHeader from "./TotalHeader";
 
-class TotalHeaderList extends Component {
-    render() {
-        return (
-            <div className="row text-center">
-                <div className="col">
-                    <TotalHeader label="kCal" count={120} />
-                </div>
-                <div className="col">
-                    <TotalHeader label="Protein" count={15} />
-                </div>
-                <div className="col">
-                    <TotalHeader label="Fat" count={4} />
-                </div>
-                <div className="col">
-                    <TotalHeader label="Carb" count={7} />
-                </div>
-            </div>
-        );
-    }
+export default function TotalHeaderList(props) {
+  return (
+    <div className="row text-center">
+      <div className="col">
+        <TotalHeader
+          label="kCal"
+          count={props.logs.reduce((acc, curr) => {
+            return acc + curr.kcal;
+          }, 0)}
+        />
+      </div>
+      <div className="col">
+        <TotalHeader
+          label="Protein"
+          count={props.logs.reduce((acc, curr) => {
+            return acc + curr.protein;
+          }, 0)}
+        />
+      </div>
+      <div className="col">
+        <TotalHeader
+          label="Fat"
+          count={props.logs.reduce((acc, curr) => {
+            return acc + curr.fat;
+          }, 0)}
+        />
+      </div>
+      <div className="col">
+        <TotalHeader
+          label="Carb"
+          count={props.logs.reduce((acc, curr) => {
+            return acc + curr.carb;
+          }, 0)}
+        />
+      </div>
+    </div>
+  );
 }
-
-export default TotalHeaderList;
