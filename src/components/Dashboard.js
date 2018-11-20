@@ -8,33 +8,56 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 
 class Dashboard extends Component {
-  render() {
-    const { logs } = this.props;
+  constructor(props) {
+    super(props);
 
     // Get the current date.
     const today = new Date();
     const currentDate = today.toISOString().substr(0, 10);
 
-    const ListArea = logs ? <LogTable logs={logs} /> : <p>Loading...</p>;
-    const TotalHeaders = logs ? (
-      <TotalHeaderList logs={this.props.logs} />
-    ) : (
-      <p>Loading...</p>
-    );
+    this.state = {
+      date: currentDate
+    };
+
+    this.onDateChange = this.onDateChange.bind(this);
+  }
+
+  onDateChange(e) {
+    this.setState({
+      date: e.target.value
+    });
+  }
+
+  render() {
+    const { logList } = this.props;
+
+    let ListArea = <div />;
+    let TotalHeaders = <div />;
+    if (logList) {
+      // Get the logs for the selected date.
+      const selectedDateLogList = logList.reduce((acc, cur) => {
+        if (cur.date === this.state.date) acc.push(cur);
+        return acc;
+      }, []);
+
+      ListArea = <LogTable logs={selectedDateLogList} />;
+      TotalHeaders = <TotalHeaderList logs={selectedDateLogList} />;
+    }
 
     return (
       <div className="container">
-        <h3 className="text-center">Dashboard</h3>
+        <h3 className="text-center">Day Totals</h3>
+        {TotalHeaders}
         <div className="form-group">
-          <label htmlFor="datepicker">Date:</label>
+          <label htmlFor="date">Date:</label>
           <input
             type="date"
-            id="datepicker"
+            id="date"
             className="form-control"
-            defaultValue={currentDate}
+            defaultValue={this.state.date}
+            onChange={this.onDateChange}
           />
         </div>
-        {TotalHeaders}
         {ListArea}
       </div>
     );
@@ -43,7 +66,7 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    logs: state.firestore.ordered.logs
+    logList: state.firestore.ordered.logs
   };
 }
 

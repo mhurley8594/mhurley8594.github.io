@@ -6,20 +6,27 @@ import Autocomplete from 'react-autocomplete';
 // Redux
 import { connect } from "react-redux";
 import { addLog } from "../actions/actionCreators";
+// USDA API key
+import { USDA_API_KEY } from '../secret/keys';
 
 class LogForm extends Component {
   constructor(props) {
     super(props);
 
+    // Get the current date.
+    const today = new Date();
+    const currentDate = today.toISOString().substr(0, 10);
+
     this.state = {
+      date: currentDate,
       foodName: "",
       foodMacros: {},
       autocompleteData: [],
       quantity: 100,
-      kcal: 100,
-      protein: 100,
-      carb: 100,
-      fat: 100,
+      kcal: 0,
+      protein: 0,
+      carb: 0,
+      fat: 0,
     };
 
     // Bind `this` context to functions of the class
@@ -41,7 +48,7 @@ class LogForm extends Component {
     */
   retrieveDataAsynchronously(searchText) {
     let _this = this;
-    let url = `https://api.nal.usda.gov/ndb/search/?format=json&q=${searchText}&max=25&offset=0&api_key=OR1fFxCjbxhOg23jsmClJFrwjzATy596EbjAjtKR`;
+    let url = `https://api.nal.usda.gov/ndb/search/?format=json&q=${encodeURI(searchText)}&max=25&offset=0&api_key=${USDA_API_KEY}`;
 
     fetch(url)
       .then(resp => resp.json())
@@ -55,11 +62,15 @@ class LogForm extends Component {
   }
 
   onChange = e => {
-    this.setState({
+    let _this = this;
+    let isQuantity = e.target.id === 'quantity';
+
+    _this.setState({
       [e.target.id]: e.target.value
+    }, () => {
+      if (isQuantity && Object.keys(_this.state.foodMacros).length !== 0) _this.calculateTotals();
     });
 
-    if (e.target.id === 'quantity' && Object.keys(this.state.foodMacros).length !== 0) this.calculateTotals();
   }
 
   onAutocompleteChange = e => {
@@ -75,6 +86,7 @@ class LogForm extends Component {
     e.preventDefault();
     // Call the addLog action creator.
     this.props.addLog({
+      date: this.state.date,
       food: this.state.foodName,
       quantity: this.state.quantity,
       kcal: this.state.kcal,
@@ -96,7 +108,7 @@ class LogForm extends Component {
     let _this = this;
 
     // Fetch the macronutrients of the selected food item.
-    fetch(`https://api.nal.usda.gov/ndb/V2/reports?ndbno=${ndbno}&type=f&format=json&api_key=OR1fFxCjbxhOg23jsmClJFrwjzATy596EbjAjtKR`)
+    fetch(`https://api.nal.usda.gov/ndb/V2/reports?ndbno=${ndbno}&type=f&format=json&api_key=${USDA_API_KEY}`)
       .then(resp => resp.json())
       .then(data => {
         const foodMacros = data.foods[0].food.nutrients.reduce((acc, cur) => {
@@ -110,9 +122,9 @@ class LogForm extends Component {
         _this.setState({
           foodName: data.foods[0].food.desc.name,
           foodMacros: foodMacros
+        }, () => {
+          _this.calculateTotals();
         });
-
-        _this.calculateTotals();
       });
   }
 
@@ -121,7 +133,6 @@ class LogForm extends Component {
       <div
         key={item.ndbno}
         className="list-group-item"
-        style={{ zIndex: 1 }}
       >
         {item.name}
       </div>
@@ -147,7 +158,7 @@ class LogForm extends Component {
   render() {
     return (
       <div className="container">
-        <h3 className="text-center">Add Log</h3>
+        <h3 className="text-center">New Log</h3>
         <TotalHeaderList
           logs={[
             {
@@ -159,6 +170,7 @@ class LogForm extends Component {
           ]}
         />
         <form onSubmit={this.onSubmit}>
+          <label htmlFor="food">Food:</label>
           <Autocomplete
             id="food"
             getItemValue={this.getItemValue}
@@ -168,10 +180,20 @@ class LogForm extends Component {
             onChange={this.onAutocompleteChange}
             onSelect={this.onSelect}
             wrapperProps={{ className: "form-group", style: {} }}
-            inputProps={{ className: "form-control", placeholder: "Search for a food item" }}
+            inputProps={{ className: "form-control", placeholder: "Search for food" }}
           />
           <div className="form-group">
-            <label htmlFor="quantity">Grams</label>
+            <label htmlFor="date">Date:</label>
+            <input
+              type="date"
+              id="date"
+              className="form-control"
+              value={this.state.date}
+              onChange={this.onChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="quantity">Grams:</label>
             <input
               id="quantity"
               name="quantity"

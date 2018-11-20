@@ -1,10 +1,11 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import { FIREBASE_API_KEY } from '../secret/keys';
 
 // Replace this with your own config details
 var config = {
-    apiKey: "AIzaSyAQyQ2mkF6k5ToK-inOmaIwQVkwxCXFLDw",
+    apiKey: FIREBASE_API_KEY,
     authDomain: "react-firebase-tutorial-3f678.firebaseapp.com",
     databaseURL: "https://react-firebase-tutorial-3f678.firebaseio.com",
     projectId: "react-firebase-tutorial-3f678",

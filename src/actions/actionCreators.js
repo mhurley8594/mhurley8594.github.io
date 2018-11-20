@@ -9,6 +9,7 @@ export const addLog = log => {
     firestore
       .collection("logs")
       .add({
+        date: log.date,
         food: log.food,
         quantity: log.quantity,
         kcal: log.kcal,
