@@ -1,7 +1,7 @@
 // React
 import React, { Component } from "react";
-import TotalHeaderList from "./TotalHeaderList";
-import LogTable from "./LogTable";
+import TotalHeaderList from "../TotalHeaderList/TotalHeaderList";
+import LogList from "../LogList/LogList";
 // Redux
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -40,14 +40,12 @@ class Dashboard extends Component {
         return acc;
       }, []);
 
-      ListArea = <LogTable logs={selectedDateLogList} />;
+      ListArea = <LogList logs={selectedDateLogList} />;
       TotalHeaders = <TotalHeaderList logs={selectedDateLogList} />;
     }
 
     return (
       <div className="container">
-        <h3 className="text-center">Day Totals</h3>
-        {TotalHeaders}
         <div className="form-group">
           <label htmlFor="date">Date:</label>
           <input
@@ -58,6 +56,7 @@ class Dashboard extends Component {
             onChange={this.onDateChange}
           />
         </div>
+        {TotalHeaders}
         {ListArea}
       </div>
     );

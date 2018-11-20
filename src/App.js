@@ -4,9 +4,9 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
-import LogForm from './components/LogForm';
-import NavBar from './components/NavBar';
+import Dashboard from './components/Dashboard/Dashboard';
+import LogForm from './components/LogForm/LogForm';
+import NavBar from './components/NavBar/NavBar';
 
 class App extends Component {
   render() {

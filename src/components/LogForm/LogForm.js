@@ -1,13 +1,14 @@
 // React
 import React, { Component } from "react";
-import TotalHeaderList from "./TotalHeaderList";
+import TotalHeaderList from "../TotalHeaderList/TotalHeaderList";
 import { Link } from "react-router-dom";
 import Autocomplete from 'react-autocomplete';
 // Redux
 import { connect } from "react-redux";
-import { addLog } from "../actions/actionCreators";
+import { addLog } from "../../actions/actionCreators";
 // USDA API key
-import { USDA_API_KEY } from '../secret/keys';
+import { USDA_API_KEY } from '../../secret/keys';
+import debounce from 'lodash/debounce';
 
 class LogForm extends Component {
   constructor(props) {
@@ -36,19 +37,13 @@ class LogForm extends Component {
     this.onSelect = this.onSelect.bind(this);
     this.getItemValue = this.getItemValue.bind(this);
     this.renderItem = this.renderItem.bind(this);
-    this.retrieveDataAsynchronously = this.retrieveDataAsynchronously.bind(this);
+    this.getFoodData = debounce(this.getFoodData.bind(this), 500);
     this.calculateTotals = this.calculateTotals.bind(this);
   }
 
-  /**
-    * Updates the state of the autocomplete data with the remote data obtained via AJAX.
-    * 
-    * @param {String} searchText content of the input that will filter the autocomplete data.
-    * @return {Nothing} The state is updated but no value is returned
-    */
-  retrieveDataAsynchronously(searchText) {
+  getFoodData() {
     let _this = this;
-    let url = `https://api.nal.usda.gov/ndb/search/?format=json&q=${encodeURI(searchText)}&max=25&offset=0&api_key=${USDA_API_KEY}`;
+    let url = `https://api.nal.usda.gov/ndb/search/?format=json&q=${encodeURIComponent(_this.state.foodName)}&max=25&offset=0&api_key=${USDA_API_KEY}`;
 
     fetch(url)
       .then(resp => resp.json())
@@ -74,12 +69,13 @@ class LogForm extends Component {
   }
 
   onAutocompleteChange = e => {
-    this.setState({
-      foodName: e.target.value
-    });
+    let _this = this;
 
-    // TODO Set delay here.
-    this.retrieveDataAsynchronously(e.target.value);
+    _this.setState({
+      foodName: e.target.value
+    }, () => {
+      _this.getFoodData();
+    });
   }
 
   onSubmit = e => {
@@ -158,18 +154,27 @@ class LogForm extends Component {
   render() {
     return (
       <div className="container">
-        <h3 className="text-center">New Log</h3>
-        <TotalHeaderList
-          logs={[
-            {
-              kcal: this.state.kcal,
-              protein: this.state.protein,
-              carb: this.state.carb,
-              fat: this.state.fat
-            }
-          ]}
-        />
         <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label htmlFor="date">Date:</label>
+            <input
+              type="date"
+              id="date"
+              className="form-control"
+              value={this.state.date}
+              onChange={this.onChange}
+            />
+          </div>
+          <TotalHeaderList
+            logs={[
+              {
+                kcal: this.state.kcal,
+                protein: this.state.protein,
+                carb: this.state.carb,
+                fat: this.state.fat
+              }
+            ]}
+          />
           <label htmlFor="food">Food:</label>
           <Autocomplete
             id="food"
@@ -182,16 +187,6 @@ class LogForm extends Component {
             wrapperProps={{ className: "form-group", style: {} }}
             inputProps={{ className: "form-control", placeholder: "Search for food" }}
           />
-          <div className="form-group">
-            <label htmlFor="date">Date:</label>
-            <input
-              type="date"
-              id="date"
-              className="form-control"
-              value={this.state.date}
-              onChange={this.onChange}
-            />
-          </div>
           <div className="form-group">
             <label htmlFor="quantity">Grams:</label>
             <input
